@@ -1,10 +1,10 @@
 from django.shortcuts import render
 
-def index_view(request):
+def index(request):
   return render(request, 'website/index.html')
 
-def about_view(request):
+def about(request):
   return render(request, 'website/about.html')
 
-def contact_view(request):
+def contact(request):
   return render(request, 'website/contact.html')
