@@ -13,7 +13,7 @@ def snippet(value,arg=20):
   return value[:arg] + "..."
 
 @register.inclusion_tag('blog/blog-popular-posts.html')
-def popularposts(arg=2):
+def popularposts(arg=4):
   posts = Post.objects.filter(status=1).order_by('-counted_view')[:arg]
   return {'posts': posts}
 
