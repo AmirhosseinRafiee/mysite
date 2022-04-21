@@ -1,7 +1,9 @@
 from django.shortcuts import render, get_object_or_404
 from django.utils import timezone
-from blog.models import Post
+from blog.forms import CommentForm
+from blog.models import Post, Comment
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.contrib import messages
 
 def blog(request, **kwargs):
     posts = Post.objects.filter(status=1, published_date__lte=timezone.now())
@@ -11,7 +13,7 @@ def blog(request, **kwargs):
         posts = posts.filter(author__username=kwargs['author_username'])
     if kwargs.get('tag_name') != None:
         posts = posts.filter(tags__name__in=[kwargs['tag_name']])
-    paginator = Paginator(posts, 2)
+    paginator = Paginator(posts, 4)
     page_number = request.GET.get('page')
     try:
         posts = paginator.page(page_number)
@@ -23,23 +25,29 @@ def blog(request, **kwargs):
     return render(request, 'blog/blog-home.html', context)
 
 def blog_single(request, pid):
+    if request.method == 'POST':
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'your comment submited successfully.')
+        else:
+            messages.error(request, "your comment didn't submited.")
     posts = Post.objects.filter(status=1, published_date__lte=timezone.now())
     post = get_object_or_404(posts, pk=pid)
     post.counted_view += 1
     post.save()
-    prev_post = None
-    next_post = None
+    comments = Comment.objects.filter(post=post.id, approved=True)
     try:
         next_post = posts.filter(id__gt=post.id).order_by("id")[0:1].get()
     except Post.DoesNotExist:
         # Post.objects.aggregate(Min("id"))['id__min']
-        pass
+        next_post = None
     try:
         prev_post = posts.filter(id__lt=post.id).order_by("-id")[0:1].get()
     except Post.DoesNotExist:
         # Post.objects.aggregate(Max("id"))['id__max']
-        pass
-    context = {'post': post, 'prev_post': prev_post, 'next_post': next_post}
+        prev_post = None
+    context = {'post': post, 'prev_post': prev_post, 'next_post': next_post, 'comments': comments}
     return render(request, 'blog/blog-single.html', context)
 
 def blog_category(request, cat_name):
