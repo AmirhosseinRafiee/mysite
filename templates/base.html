@@ -134,7 +134,8 @@
                 {% csrf_token %}
                 <div class="input-group d-flex flex-row">
                   <input name="email" placeholder="Email Address" onfocus="this.placeholder = ''"
-                    onblur="this.placeholder = 'Email Address '" required="" type="email" />
+                    onblur="this.placeholder = 'Email Address '" required="" type="email" 
+                    pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" title="Invalid email address" />
                   <button type="submit" class="btn bb-btn">
                     <span class="lnr lnr-location"></span>
                   </button>

@@ -3,3 +3,10 @@ asgiref
 pytz
 sqlparse
 pillow
+django-multi-captcha-admin
+django-robots
+django-simple-captcha
+django-summernote
+django-taggit
+django-debug-toolbar
+django_extensions
