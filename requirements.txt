@@ -1,7 +1,4 @@
 Django>3.2,<3.3
-asgiref
-pytz
-sqlparse
 pillow
 django-multi-captcha-admin
 django-robots
@@ -10,3 +7,5 @@ django-summernote
 django-taggit
 django-debug-toolbar
 django_extensions
+python-decouple
+mysqlclient

@@ -23,6 +23,7 @@ from website.sitemaps import StaticViewSitemap
 from blog.sitemaps import BlogSitemap
 from django.contrib.auth import views as auth_views
 from accounts.urls import views as accounts_views
+
 sitemaps = {
     'static': StaticViewSitemap,
     'blog': BlogSitemap
@@ -36,7 +37,7 @@ urlpatterns = [
     path('summernote/', include('django_summernote.urls')),
     path('sitemap.xml', sitemap, {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap'),
     path('robots.txt', include('robots.urls')),  
-    path('__debug__/', include('debug_toolbar.urls')),
+    # path('__debug__/', include('debug_toolbar.urls')),
     path('captcha/', include('captcha.urls')),
     path('auth_login', accounts_views.login, name='auth_login'),
     path('reset_password/', auth_views.PasswordResetView.as_view(), name='reset_password'),
