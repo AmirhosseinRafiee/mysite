@@ -12,14 +12,14 @@ $(document).ready(function() {
     $(".fitscreen").css("height", fitscreen);
 
 
-    // ------- Datepicker  js --------//  
+    // ------- Datepicker  js --------//
 
       $( function() {
         $( ".date-picker" ).datepicker();
       } );
 
 
-    //------- Niceselect  js --------//  
+    //------- Niceselect  js --------//
 
     if (document.getElementById("default-select")) {
         $('select').niceSelect();
@@ -29,9 +29,9 @@ $(document).ready(function() {
     };
     if (document.getElementById("service-select")) {
         $('select').niceSelect();
-    };    
+    };
 
-    //------- Lightbox  js --------//  
+    //------- Lightbox  js --------//
 
     $('.img-gal').magnificPopup({
         type: 'image',
@@ -48,7 +48,7 @@ $(document).ready(function() {
         fixedContentPos: false
     });
 
-    //------- Superfish nav menu  js --------//  
+    //------- Superfish nav menu  js --------//
 
     $('.nav-menu').superfish({
         animation: {
@@ -57,67 +57,7 @@ $(document).ready(function() {
         speed: 400
     });
 
-
-
-    //------- Owl Carusel  js --------//  
-
-    $('.active-hot-deal-carusel').owlCarousel({
-        items:1,
-        loop:true,
-        autoplay:true,
-        autoplayHoverPause: true,        
-        smartSpeed:500,          
-        margin:30,
-        dots: true
-    });
-
-     $('.active-testimonial').owlCarousel({
-            items: 2,
-            loop: true,
-            margin: 30,
-            autoplayHoverPause: true,
-            smartSpeed:500,              
-            dots: true,
-            autoplay: true,
-            responsive: {
-                0: {
-                    items: 1
-                },
-                480: {
-                    items: 1,
-                },
-                992: {
-                    items: 2,
-                }
-            }
-        });
-
-
-        $('.active-recent-blog-carusel').owlCarousel({
-            items: 3,
-            loop: true,
-            margin: 30,
-            dots: true,
-            autoplayHoverPause: true, 
-            smartSpeed:500,               
-            autoplay: true,
-            responsive: {
-                0: {
-                    items: 1
-                },
-                480: {
-                    items: 1,
-                },
-                768: {
-                    items: 2,
-                },
-                961: {
-                    items: 3,
-                }
-            }
-        }); 
-
-    //------- Mobile Nav  js --------//  
+    //------- Mobile Nav  js --------//
 
     if ($('#nav-menu-container').length) {
         var $mobile_nav = $('#nav-menu-container').clone().prop({
@@ -158,7 +98,7 @@ $(document).ready(function() {
         $("#mobile-nav, #mobile-nav-toggle").hide();
     }
 
-    //------- Smooth Scroll  js --------//  
+    //------- Smooth Scroll  js --------//
 
     $('.nav-menu a, #mobile-nav a, .scrollto').on('click', function() {
         if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') && location.hostname == this.hostname) {
@@ -243,7 +183,7 @@ $(document).ready(function() {
 
 
 
-    //------- Header Scroll Class  js --------//  
+    //------- Header Scroll Class  js --------//
 
     $(window).scroll(function() {
         if ($(this).scrollTop() > 100) {
@@ -253,7 +193,7 @@ $(document).ready(function() {
         }
     });
 
-    //------- Google Map  js --------//  
+    //------- Google Map  js --------//
 
     if (document.getElementById("map")) {
         google.maps.event.addDomListener(window, 'load', init);
@@ -389,7 +329,7 @@ $(document).ready(function() {
         }
     }
 
-    //------- Mailchimp js --------//  
+    //------- Mailchimp js --------//
 
     $(document).ready(function() {
         $('#mc_embed_signup').find('form').ajaxChimp();

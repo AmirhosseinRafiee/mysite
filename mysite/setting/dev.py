@@ -30,4 +30,4 @@ STATICFILES_DIRS = [
     BASE_DIR / "statics",
 ]
 
-# SECURE_SSL_REDIRECT = False
+SECURE_SSL_REDIRECT = False

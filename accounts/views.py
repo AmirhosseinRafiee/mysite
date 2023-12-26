@@ -11,26 +11,29 @@ def login(request):
     if request.GET.get('next') != None:
       return redirect(request.GET.get('next'))
     messages.warning(request, 'you are in your account!')
-    return redirect('/')  
+    return redirect('/')
   elif request.method == 'POST':
-      userinput = request.POST.get('username')
-      try:
-        username = User.objects.get(email=userinput).username
-      except User.DoesNotExist:
-        username = userinput
-      password = request.POST.get('password')
-      user = authenticate(request, username=username, password=password)
-      if user is not None:
-        auth_login(request, user)
-        if request.GET.get('next') != None:
-          return redirect(request.GET.get('next')) 
-        return redirect('/') 
+    user_input = request.POST.get('username')
+    try:
+      username = User.objects.get(email=user_input).username
+    except User.DoesNotExist:
+      username = user_input
+    password = request.POST.get('password')
+    user = authenticate(request, username=username, password=password)
+    if user is not None:
+      auth_login(request, user)
+      messages.success(request, 'Login successful.')
+      if request.GET.get('next') != None:
+        return redirect(request.GET.get('next'))
+      return redirect('/')
+    messages.warning(request, 'Login failed. Please check your username and password.')
   return render(request, 'accounts/login.html', {'next': next})
-  
+
 
 @login_required
 def logout(request):
   auth_logout(request)
+  messages.success(request, "You've been successfully logged out.")
   return redirect('/')
 
 def signup(request):
@@ -44,7 +47,8 @@ def signup(request):
       messages.success(request, 'User created.')
       return redirect('/accounts/login')
     else:
-      messages.error(request, 'User didnt created.')
+      for e in form.errors.values():
+        messages.warning(request, e)
   else:
     form = UserCreationForm()
   return render(request, 'accounts/signup.html', {'form': form})
